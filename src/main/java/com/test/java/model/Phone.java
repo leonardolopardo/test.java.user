@@ -22,6 +22,8 @@ public class Phone {
 	@JoinColumn(name="id_user")
 	private User user;
 
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)

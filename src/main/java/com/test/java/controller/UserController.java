@@ -1,7 +1,5 @@
 package com.test.java.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.java.builder.UserBuilder;
-import com.test.java.dto.PhoneDto;
 import com.test.java.dto.UserDto;
 import com.test.java.model.User;
 import com.test.java.service.UserService;
@@ -27,13 +24,12 @@ public class UserController {
 	private UserBuilder userBuilder;
 
 	@PostMapping(value = "")
-	public void add(@Valid @RequestBody UserDto dto) {
-		
-		List<PhoneDto> listPhoneDto = dto.getPhones();
-		User user = userBuilder.dtoToModel(dto, listPhoneDto);
-		this.userService.save(user);
-		
-		this.userService.findAll();
+	public UserDto add(@Valid @RequestBody UserDto dto) {
+
+		User user = userBuilder.dtoToModel(dto);
+		User userSaved = this.userService.save(user);
+		return this.userBuilder.modelToDto(userSaved);
+
 	}
 
 }

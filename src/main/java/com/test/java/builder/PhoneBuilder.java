@@ -16,13 +16,27 @@ public class PhoneBuilder {
 		List<Phone> listModel = new ArrayList<>();
 
 		for (PhoneDto phoneDto : listPhoneDto) {
-			Phone phone = Phone.builder().id(phoneDto.getId()).number(phoneDto.getNumber()).citycode(phoneDto.getCitycode())
-					.countrycode(phoneDto.getCountrycode()).build();
+			Phone phone = Phone.builder().id(phoneDto.getId()).number(phoneDto.getNumber())
+					.citycode(phoneDto.getCitycode()).countrycode(phoneDto.getCountrycode()).build();
 
 			listModel.add(phone);
 		}
 
 		return listModel;
+	}
+
+	public List<PhoneDto> listModelToListDto(List<Phone> listPhone) {
+		List<PhoneDto> listDto = new ArrayList<>();
+
+		for (Phone phone : listPhone) {
+			PhoneDto phoneDto = PhoneDto.builder().id(phone.getId()).number(phone.getNumber())
+					.citycode(phone.getCitycode()).countrycode(phone.getCountrycode()).build();
+
+			listDto.add(phoneDto);
+		}
+
+		return listDto;
+
 	}
 
 }

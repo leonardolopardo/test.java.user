@@ -1,9 +1,11 @@
 package com.test.java.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 public class PhoneDto {
 
 	@Getter

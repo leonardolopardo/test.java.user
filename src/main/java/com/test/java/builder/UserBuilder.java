@@ -15,14 +15,24 @@ public class UserBuilder {
 
 	@Autowired
 	private PhoneBuilder phoneBuilder;
-	
-	public User dtoToModel(UserDto userDto, List<PhoneDto> listPhoneDto) {
-		
-		List<Phone> listPhone = phoneBuilder.listDtoToListModel(listPhoneDto);
-		
-		User user = User.builder().id(userDto.getId()).email(userDto.getEmail()).name(userDto.getName()).password(userDto.getPassword()).phones(listPhone).build();
+
+	public User dtoToModel(UserDto userDto) {
+		List<Phone> listPhone = phoneBuilder.listDtoToListModel(userDto.getPhones());
+
+		User user = User.builder().id(userDto.getId()).email(userDto.getEmail()).name(userDto.getName())
+				.password(userDto.getPassword()).phones(listPhone).build();
 
 		return user;
+	}
+
+	public UserDto modelToDto(User user) {
+
+		List<PhoneDto> listPhoneDto = phoneBuilder.listModelToListDto(user.getPhones());
+
+		UserDto userDto = UserDto.builder().id(user.getId()).email(user.getEmail()).name(user.getName())
+				.password(user.getPassword()).phones(listPhoneDto).build();
+
+		return userDto;
 	}
 
 }
