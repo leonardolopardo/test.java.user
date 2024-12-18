@@ -4,12 +4,14 @@ import java.util.List;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
-public class UserDto {
+@NoArgsConstructor
+@SuperBuilder
+public class UserDto extends AuditableDto {
 	@Getter
 	@Setter
 	private Long id;

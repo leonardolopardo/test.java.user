@@ -20,7 +20,8 @@ public class UserBuilder {
 		List<Phone> listPhone = phoneBuilder.listDtoToListModel(userDto.getPhones());
 
 		User user = User.builder().id(userDto.getId()).email(userDto.getEmail()).name(userDto.getName())
-				.password(userDto.getPassword()).phones(listPhone).build();
+				.password(userDto.getPassword()).phones(listPhone).createdDate(userDto.getCreatedDate())
+				.lastModifiedDate(userDto.getLastModifiedDate()).build();
 
 		return user;
 	}
@@ -28,9 +29,9 @@ public class UserBuilder {
 	public UserDto modelToDto(User user) {
 
 		List<PhoneDto> listPhoneDto = phoneBuilder.listModelToListDto(user.getPhones());
-
 		UserDto userDto = UserDto.builder().id(user.getId()).email(user.getEmail()).name(user.getName())
-				.password(user.getPassword()).phones(listPhoneDto).build();
+				.password(user.getPassword()).phones(listPhoneDto).createdDate(user.getCreatedDate())
+				.lastModifiedDate(user.getLastModifiedDate()).build();
 
 		return userDto;
 	}
