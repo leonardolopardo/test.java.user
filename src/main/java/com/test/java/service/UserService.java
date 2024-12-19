@@ -10,4 +10,6 @@ import com.test.java.model.User;
 @Repository
 public interface UserService extends CrudRepository<User, Long> {
 
+	boolean existsByEmail(String email);
+
 }

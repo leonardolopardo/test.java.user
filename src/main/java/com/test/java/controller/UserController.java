@@ -1,13 +1,19 @@
 package com.test.java.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.java.builder.UserBuilder;
+import com.test.java.builder.UserSaveBuilder;
+import com.test.java.constants.ErrorConstants;
 import com.test.java.dto.UserDto;
+import com.test.java.dto.response.ResponseDto;
+import com.test.java.dto.response.ResponseErrorDto;
 import com.test.java.model.User;
 import com.test.java.service.UserService;
 
@@ -23,12 +29,20 @@ public class UserController {
 	@Autowired
 	private UserBuilder userBuilder;
 
-	@PostMapping(value = "")
-	public UserDto add(@Valid @RequestBody UserDto dto) {
+	@Autowired
+	private UserSaveBuilder userSaveBuilder;
 
-		User user = userBuilder.dtoToModel(dto);
-		User userSaved = this.userService.save(user);
-		return this.userBuilder.modelToDto(userSaved);
+	@PostMapping(value = "")
+	public ResponseDto add(@RequestHeader("Authorization") String token, @Valid @RequestBody UserDto dto) {
+
+		if (!this.userService.existsByEmail(dto.getEmail())) {
+			User userToSave = userBuilder.dtoToModel(dto);
+			User userSaved = this.userService.save(userToSave);
+
+			return userSaveBuilder.userToUserOkDto(userSaved);
+		} else {
+			return new ResponseErrorDto(HttpStatus.NOT_FOUND.getReasonPhrase(), ErrorConstants.EXISTS_EMAIL);
+		}
 
 	}
 
