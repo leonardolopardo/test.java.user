@@ -2,6 +2,8 @@ package com.test.java.dto;
 
 import java.util.List;
 
+import com.test.java.util.DynamicRegex;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -27,6 +29,7 @@ public class UserDto extends AuditableDto {
 	@Getter
 	@Setter
 	@NotEmpty
+	@DynamicRegex(regexProperty = "app.secret.password", message = "El password no respeta el patron")
 	private String password;
 	@Getter
 	@Setter
