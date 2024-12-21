@@ -13,6 +13,10 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * JWT web filer
+ * Parsea el token recibido
+ */
 @WebFilter
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 

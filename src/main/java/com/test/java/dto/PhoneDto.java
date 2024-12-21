@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * DTO de Phone
+ */
 @NoArgsConstructor
 @SuperBuilder
 public class PhoneDto {

@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * DTO de los campos de Auditoria
+ */
 @NoArgsConstructor
 @SuperBuilder
 public abstract class AuditableDto {

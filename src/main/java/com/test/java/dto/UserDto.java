@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * DTO de User
+ */
 @NoArgsConstructor
 @SuperBuilder
 public class UserDto extends AuditableDto {

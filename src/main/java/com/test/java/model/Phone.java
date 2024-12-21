@@ -13,6 +13,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Clase Phone
+ */
 @Builder
 @Entity
 @Table(name = "phone")

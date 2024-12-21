@@ -6,19 +6,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import com.test.java.jwt.JwtAuthenticationFilter;
 
+/**
+ * Clase de configuracion para security 
+ */
 @Configuration
 public class SecurityConfig  {
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeHttpRequests((authz) -> authz
-//                .anyRequest().authenticated()
-//            )
-//            .httpBasic(withDefaults());
-//        return http.build();
-//    }
-	
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -26,6 +19,9 @@ public class SecurityConfig  {
     
     @Bean
     WebSecurityCustomizer webSecurityCustomizer() {
+    	/**
+    	 * Escribir los paths de los controllers a escanear
+    	 */
         return (web) -> web.ignoring().requestMatchers("/token/generate", "/token/protected", "/user");
     }
 }

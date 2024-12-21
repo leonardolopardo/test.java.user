@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Clase para DTO de un User guardado exitosamente
+ */
 @SuperBuilder
 public class ResponseUserSaveOkDto extends ResponseDto {
 

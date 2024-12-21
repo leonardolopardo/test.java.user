@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.java.jwt.JwtService;
 
+
+/**
+ * Controlador para el comportamiento de token JWT
+ */
 @RequestMapping("/token")
 @RestController
 public class TokenController {

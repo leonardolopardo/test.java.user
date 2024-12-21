@@ -10,6 +10,9 @@ import com.test.java.dto.UserDto;
 import com.test.java.model.Phone;
 import com.test.java.model.User;
 
+/**
+ * Builder de la clase User
+ */
 @Component
 public class UserBuilder {
 

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Clase padre para las respuestas
+ */
 @MappedSuperclass
 @AllArgsConstructor
 @SuperBuilder

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * Clase para obtener y validar la Regex 
+ */
 @Component
 public class DynamicRegexValidator implements ConstraintValidator<DynamicRegex, String> {
 
@@ -18,7 +21,7 @@ public class DynamicRegexValidator implements ConstraintValidator<DynamicRegex, 
 
 	@Override
 	public void initialize(DynamicRegex constraintAnnotation) {
-		// Obtén la expresión regular desde el archivo .properties
+		// Obtiene la expresión regular desde el archivo .properties
 		String propertyKey = constraintAnnotation.regexProperty();
 		this.regex = environment.getProperty(propertyKey);
 	}

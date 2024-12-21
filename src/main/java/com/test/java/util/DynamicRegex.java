@@ -8,6 +8,9 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
+/**
+ * Dynamic Regex
+ */
 @Constraint(validatedBy = DynamicRegexValidator.class)
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -16,5 +19,5 @@ public @interface DynamicRegex {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
-    String regexProperty(); // Nombre de la propiedad en el archivo .properties
+    String regexProperty();
 }

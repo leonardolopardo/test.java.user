@@ -2,6 +2,7 @@ package com.test.java.jwt;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -10,10 +11,15 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 
 //FIXME encontrar la alternativa para los metodos deprecados
+/**
+ * JWT service
+ */
 @Component
+@SuppressWarnings("deprecation")
 public class JwtService {
 
-	private String secretKey = "692b4f3fa7ae42748a4d225eceacefff692b4f3fa7ae42748a4d225eceacefff";
+	@Value("${app.secret.secretKey}")
+	private String secretKey;
 
 	// Método para obtener los detalles del token (claims)
 	private Claims extractClaims(String token) {

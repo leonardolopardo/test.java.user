@@ -17,6 +17,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Clase User
+ */
 @SuperBuilder
 @Entity
 @EntityListeners(AuditingEntityListener.class)

@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Clase de Auditoria
+ */
 @MappedSuperclass
 @SuperBuilder
 public abstract class Auditable {

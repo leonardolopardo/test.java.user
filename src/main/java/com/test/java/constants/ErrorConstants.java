@@ -1,5 +1,9 @@
 package com.test.java.constants;
 
+
+/**
+ * Constants de mensajes de errores
+ */
 public class ErrorConstants {
 	
 	public static final String EXISTS_EMAIL = "El correo ya registrado";

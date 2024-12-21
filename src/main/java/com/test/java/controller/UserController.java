@@ -1,5 +1,7 @@
 package com.test.java.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +16,16 @@ import com.test.java.constants.ErrorConstants;
 import com.test.java.dto.UserDto;
 import com.test.java.dto.response.ResponseDto;
 import com.test.java.dto.response.ResponseErrorDto;
+import com.test.java.dto.response.ResponseUserSaveOkDto;
 import com.test.java.model.User;
 import com.test.java.service.UserService;
 
 import jakarta.validation.Valid;
 
+
+/**
+ * Comportamiento para el controlador de User
+ */
 @RequestMapping("/user")
 @RestController
 public class UserController {
@@ -39,7 +46,12 @@ public class UserController {
 			User userToSave = userBuilder.dtoToModel(dto);
 			User userSaved = this.userService.save(userToSave);
 
-			return userSaveBuilder.userToUserOkDto(userSaved);
+			ResponseUserSaveOkDto userSaveOkDto = userSaveBuilder.userToUserOkDto(userSaved);
+			userSaveOkDto.setToken(token);
+			userSaveOkDto.setLastLogin(LocalDateTime.now());
+			
+			
+			return userSaveOkDto;
 		} else {
 			return new ResponseErrorDto(HttpStatus.NOT_FOUND.getReasonPhrase(), ErrorConstants.EXISTS_EMAIL);
 		}

@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 import com.test.java.dto.response.ResponseUserSaveOkDto;
 import com.test.java.model.User;
 
+
+/**
+ * Builder de salida de un User guardado
+ */
 @Component
 public class UserSaveBuilder {
 

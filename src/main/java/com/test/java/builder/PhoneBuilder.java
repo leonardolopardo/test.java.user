@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import com.test.java.dto.PhoneDto;
 import com.test.java.model.Phone;
 
+/**
+ * Builder de la clase Phone
+ */
 @Component
 public class PhoneBuilder {
 
