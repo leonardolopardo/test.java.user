@@ -37,6 +37,11 @@ public class User extends Auditable {
 	@Getter
 	@Setter
 	private String name;
+	
+	@Column(name = "username", nullable = false)
+	@Getter
+	@Setter
+	private String userName;
 
 	@Column(name = "email", nullable = false)
 	@Getter

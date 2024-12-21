@@ -1,5 +1,6 @@
 package com.test.java.builder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ public class UserBuilder {
 	@Autowired
 	private PhoneBuilder phoneBuilder;
 
+	// FIXME Se considera lastModifiedDate en NULL, ya que el problema no plantea
+	// metodo de modificacion.
+	// FIXME Se considera createdDate como un LocalDateTime.now(). Todo POST genera
+	// una nueva tupla en base de datos.
 	public User dtoToModel(UserDto userDto) {
 		List<Phone> listPhone = phoneBuilder.listDtoToListModel(userDto.getPhones());
 
 		User user = User.builder().id(userDto.getId()).email(userDto.getEmail()).name(userDto.getName())
-				.password(userDto.getPassword()).phones(listPhone).createdDate(userDto.getCreatedDate())
-				.lastModifiedDate(userDto.getLastModifiedDate()).build();
+				.userName(userDto.getUserName()).password(userDto.getPassword()).phones(listPhone)
+				.createdDate(LocalDateTime.now()).lastModifiedDate(null).build();
 
 		return user;
 	}
@@ -38,5 +43,5 @@ public class UserBuilder {
 
 		return userDto;
 	}
-	
+
 }

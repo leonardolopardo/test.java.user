@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,10 @@ public class ResponseUserSaveOkDto extends ResponseDto {
 	@Getter
 	@Setter
 	private String token;
+
+	@Getter
+	@Setter
+	private String userName;
 
 	@Getter
 	@Setter

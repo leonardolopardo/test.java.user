@@ -17,11 +17,11 @@ import com.test.java.dto.UserDto;
 import com.test.java.dto.response.ResponseDto;
 import com.test.java.dto.response.ResponseErrorDto;
 import com.test.java.dto.response.ResponseUserSaveOkDto;
+import com.test.java.jwt.JwtService;
 import com.test.java.model.User;
 import com.test.java.service.UserService;
 
 import jakarta.validation.Valid;
-
 
 /**
  * Comportamiento para el controlador de User
@@ -39,23 +39,44 @@ public class UserController {
 	@Autowired
 	private UserSaveBuilder userSaveBuilder;
 
+	@Autowired
+	private JwtService jwtService;
+
+	private String extractToken(String token) {
+		token = token.substring(7);
+		return token;
+	}
+
 	@PostMapping(value = "")
 	public ResponseDto add(@RequestHeader("Authorization") String token, @Valid @RequestBody UserDto dto) {
 
+		// Verificacion si existe el mismo email registrado
 		if (!this.userService.existsByEmail(dto.getEmail())) {
+			String username = jwtService.extractUsername(extractToken(token));
+			dto.setUserName(username);
+
 			User userToSave = userBuilder.dtoToModel(dto);
+
+			LocalDateTime lastLogin = LocalDateTime.now();
+			LocalDateTime createdDate = LocalDateTime.now();
+
+			// Verificacion si existe nombre de usuario para actualizar lastLogin
+			if (!this.userService.existsByUserName(username)) {
+				lastLogin = userToSave.getCreatedDate();
+			}
+
 			User userSaved = this.userService.save(userToSave);
 
 			ResponseUserSaveOkDto userSaveOkDto = userSaveBuilder.userToUserOkDto(userSaved);
-			userSaveOkDto.setToken(token);
-			userSaveOkDto.setLastLogin(LocalDateTime.now());
-			
-			
+			userSaveOkDto.setUserName(username);
+			userSaveOkDto.setToken(extractToken(token));
+			userSaveOkDto.setLastLogin(lastLogin);
+			// FIXME no entiendo el criterio cuando un usuario podria estar inactivo.
+			userSaveOkDto.setIsactive(true);
+
 			return userSaveOkDto;
 		} else {
 			return new ResponseErrorDto(HttpStatus.NOT_FOUND.getReasonPhrase(), ErrorConstants.EXISTS_EMAIL);
 		}
-
 	}
-
 }
