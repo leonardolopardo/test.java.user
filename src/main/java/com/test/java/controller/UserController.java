@@ -58,7 +58,6 @@ public class UserController {
 			User userToSave = userBuilder.dtoToModel(dto);
 
 			LocalDateTime lastLogin = LocalDateTime.now();
-			LocalDateTime createdDate = LocalDateTime.now();
 
 			// Verificacion si existe nombre de usuario para actualizar lastLogin
 			if (!this.userService.existsByUserName(username)) {
